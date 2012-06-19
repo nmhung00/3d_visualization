@@ -1,1 +1,8 @@
-test git
+The main idea is in file simpleDrawing.cpp:
+All the points and positions are stored in vector<vector<float>*> points, where points[i] is the points and position of the same file.
+
+
+To compile and run: (With libQGLViewer installed)
+make
+./simpleDrawing
+
