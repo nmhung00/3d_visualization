@@ -1,8 +1,10 @@
 The main idea is in file simpleDrawing.cpp:
-All the points and positions are stored in vector<vector<float>*> points, where points[i] is the points and position of the same file.
+All the points and positions are stored in vector<vector<float>*> points, where points[i] is the position and respective points.
+For each points[i], the first three numbers are the coordinates of camera position, then each three numbers after that are the coordinates of the points around that position.
+Each time draw() is called, points and positions from points[0] to points[counter] will be drawn. Counter will increase from 0 to points.size()
 
 
-To compile and run: (With libQGLViewer installed)
+To compile and run: (With libQGLViewer and Qt installed)
 make
 ./simpleDrawing
 

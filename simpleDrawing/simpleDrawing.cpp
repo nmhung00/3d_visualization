@@ -10,10 +10,12 @@
 
 using namespace std;
 
-vector<vector<float> *> points;
-unsigned int counter = 0;
+vector<vector<float> *> points; // points[i] includes position and points of a file
 
-// Draws a spiral
+unsigned int counter = 0; // Count number of files which have been drawn
+
+int refresh_rate = 50; // Number of mili second between each update (The screen is also updated when you use the mouse)
+
 void Viewer::draw() {
 
 	vector<float> *temp;
@@ -21,9 +23,12 @@ void Viewer::draw() {
 	
 	for(unsigned int i = 0; i <= counter; i++) {
 		temp = points[i];
-		glColor3f(0.0f, 0.0f, 1.0f);
+		// Draw the position
+		glColor3f(0.0f, 0.0f, 1.0f); // Coloring position
 		glVertex3f( (*temp)[0], (*temp)[1], (*temp)[2] );
-		glColor3f(0.0f, 1.0f, 0.0f);
+		
+		// Draw the points
+		glColor3f(0.0f, 1.0f, 0.0f); // Coloring points
 		for(unsigned int k = 1; k < temp->size()/3; k++)
 			glVertex3f( (*temp)[3 * k], (*temp)[3 * k + 1], (*temp)[3 * k + 2] );
 	}
@@ -32,8 +37,9 @@ void Viewer::draw() {
 	
 	if(counter < (points.size() - 1))
 		counter++;
+		
 	if(counter == (points.size() - 1) )
-		timer->stop();
+		timer->stop(); // Stop timer when all the files have been drawn
 	
 
 }
@@ -45,8 +51,9 @@ void Viewer::init() {
 	// Opens help window
 	help();
 	
-	string pointsDir = "/home/hungnguyen/Desktop/Dimitris/points";
-	string positionsDir = "/home/hungnguyen/Desktop/Dimitris/positions";
+	// Directories of points and positions
+	string pointsDir = "points";
+	string positionsDir = "positions";
 	
 	vector<string> pointsFiles = read_directory(pointsDir);
 	vector<string> positionsFiles = read_directory(positionsDir);
@@ -64,6 +71,7 @@ void Viewer::init() {
 		
 		tempFile.open(positionsFiles[i].c_str());
 		
+		// Reading a position file
 		while(getline(tempFile, tempLine)) {
 			temp = (char *) malloc ( (tempLine.size() + 1) * sizeof(char) );
 			strcpy(temp, tempLine.c_str());
@@ -74,16 +82,13 @@ void Viewer::init() {
 			points[len - 1]->push_back((v[1]));
 			points[len - 1]->push_back((v[2]));
 			free(temp);
-			
-			//~ if(i <= 10)
-				//~ cout << "test file " << positionsFiles[i] << ": " << v[0] << " " << v[1] << " " << v[2] << endl;
-			
 		}
 		
 		tempFile.close();
 		
 		tempFile.open(pointsFiles[i].c_str());
 		
+		// Reading a points file
 		while(getline(tempFile, tempLine)) {
 			temp = (char *) malloc ( (tempLine.size() + 1) * sizeof(char) );
 			strcpy(temp, tempLine.c_str());
@@ -100,9 +105,12 @@ void Viewer::init() {
 		
 	}
 	
+	// Create a timer
 	timer = new QTimer(this);
+	// Everytime timeout() is called, updateGL() is also called. When updateGL() is called, the display will be redrawn.
 	connect(timer, SIGNAL(timeout()), SLOT(updateGL()));
-	timer->start(20);
+	// Start the timer with refresh rate as defined
+	timer->start(refresh_rate);
 }
 
 QString Viewer::helpString() const {
