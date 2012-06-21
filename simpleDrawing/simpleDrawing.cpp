@@ -36,11 +36,12 @@ void Viewer::draw() {
 	
 	glEnd();
 	
-	//~ setSceneRadius(50);
-	//~ setSceneCenter(Vec (0, 0, counter/100) );
-	//~ camera()->showEntireScene();
-	camera()->setPosition(Vec(1, 0, counter/100));
-	camera()->setViewDirection(Vec(0, 0, 1));
+	setSceneRadius(50);
+	setSceneCenter(Vec (0, 0, 0.6 + counter/100) );
+	camera()->setViewDirection(Vec(-1, 0, 0));
+	camera()->showEntireScene();
+	//~ camera()->setPosition(Vec(1, 0, counter/100));
+	//~ camera()->setViewDirection(Vec(0, 0, 1));
 	
 	if(counter < (points.size() - 1))
 		counter++;
