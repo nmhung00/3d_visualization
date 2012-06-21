@@ -9,12 +9,13 @@
 #include "read_directory.h"
 
 using namespace std;
+using namespace qglviewer;
 
 vector<vector<float> *> points; // points[i] includes position and points of a file
 
 unsigned int counter = 0; // Count number of files which have been drawn
 
-int refresh_rate = 50; // Number of mili second between each update (The screen is also updated when you use the mouse)
+int refresh_rate = 5; // Number of mili second between each update (The screen is also updated when you use the mouse)
 
 void Viewer::draw() {
 
@@ -35,6 +36,12 @@ void Viewer::draw() {
 	
 	glEnd();
 	
+	//~ setSceneRadius(50);
+	//~ setSceneCenter(Vec (0, 0, counter/100) );
+	//~ camera()->showEntireScene();
+	camera()->setPosition(Vec(1, 0, counter/100));
+	camera()->setViewDirection(Vec(0, 0, 1));
+	
 	if(counter < (points.size() - 1))
 		counter++;
 		
@@ -50,6 +57,10 @@ void Viewer::init() {
   
 	// Opens help window
 	help();
+	
+	//~ setSceneRadius(100);
+	//~ setSceneCenter(qglviewer::Vec (0, 0, 0) );
+	//~ camera()->showEntireScene();
 	
 	// Directories of points and positions
 	string pointsDir = "points";
