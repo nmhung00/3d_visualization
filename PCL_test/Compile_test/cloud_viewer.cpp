@@ -8,7 +8,7 @@ int user_data;
 void 
 viewerOneOff (pcl::visualization::PCLVisualizer& viewer)
 {
-    viewer.setBackgroundColor (0.0, 0.5, 1.0);
+    viewer.setBackgroundColor (1.0, 0.5, 1.0);
     pcl::PointXYZ o;
     o.x = 1.0;
     o.y = 0;

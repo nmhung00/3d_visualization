@@ -4,7 +4,7 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_CXX
-  "/home/hungnguyen/Desktop/PCL_test/Compile_test/cloud_viewer.cpp" "/home/hungnguyen/Desktop/PCL_test/Compile_test/CMakeFiles/cloud_viewer.dir/cloud_viewer.cpp.o"
+  "/home/hungnguyen/Desktop/3d_visualization/PCL_test/Compile_test/cloud_viewer.cpp" "/home/hungnguyen/Desktop/3d_visualization/PCL_test/Compile_test/CMakeFiles/cloud_viewer.dir/cloud_viewer.cpp.o"
   )
 SET(CMAKE_CXX_COMPILER_ID "GNU")
 

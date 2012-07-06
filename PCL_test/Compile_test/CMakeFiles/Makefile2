@@ -44,10 +44,10 @@ CMAKE_COMMAND = /usr/bin/cmake
 RM = /usr/bin/cmake -E remove -f
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/hungnguyen/Desktop/PCL_test/Compile_test
+CMAKE_SOURCE_DIR = /home/hungnguyen/Desktop/3d_visualization/PCL_test/Compile_test
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/hungnguyen/Desktop/PCL_test/Compile_test
+CMAKE_BINARY_DIR = /home/hungnguyen/Desktop/3d_visualization/PCL_test/Compile_test
 
 #=============================================================================
 # Target rules for target CMakeFiles/cloud_viewer.dir
@@ -56,7 +56,7 @@ CMAKE_BINARY_DIR = /home/hungnguyen/Desktop/PCL_test/Compile_test
 CMakeFiles/cloud_viewer.dir/all:
 	$(MAKE) -f CMakeFiles/cloud_viewer.dir/build.make CMakeFiles/cloud_viewer.dir/depend
 	$(MAKE) -f CMakeFiles/cloud_viewer.dir/build.make CMakeFiles/cloud_viewer.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/hungnguyen/Desktop/PCL_test/Compile_test/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/hungnguyen/Desktop/3d_visualization/PCL_test/Compile_test/CMakeFiles  1
 	@echo "Built target cloud_viewer"
 .PHONY : CMakeFiles/cloud_viewer.dir/all
 
@@ -66,9 +66,9 @@ all: CMakeFiles/cloud_viewer.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/cloud_viewer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hungnguyen/Desktop/PCL_test/Compile_test/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hungnguyen/Desktop/3d_visualization/PCL_test/Compile_test/CMakeFiles 1
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/cloud_viewer.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hungnguyen/Desktop/PCL_test/Compile_test/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hungnguyen/Desktop/3d_visualization/PCL_test/Compile_test/CMakeFiles 0
 .PHONY : CMakeFiles/cloud_viewer.dir/rule
 
 # Convenience name for target.
