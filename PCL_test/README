@@ -1,0 +1,11 @@
+PCLViewer is a class used to draw robot's positions and points around its location.
+
+To compile and run:
+Install PCL:
+sudo add-apt-repository ppa:v-launchpad-jochen-sprickerhof-de/pcl
+sudo apt-get update
+sudo apt-get install libpcl-all
+In PCLViewer directory:
+cmake CMakeLists.txt
+make
+./viewer

@@ -107,8 +107,6 @@ public:
 	bool autoTracking; /*! Let the program change camera's positions and directions automatically */
 private:
 	boost::shared_ptr<visualization::PCLVisualizer> viewer; /*! The viewer which displays point clouds*/
-	string pointsDirectory; /*! Path to the directory of points */
-	string positionsDirectory; /*! Path to the directory of positions */
 	vector<string> pointsFiles; /*! List of names of files of points */
 	vector<string> positionsFiles; /*! List of name of files of positions */
 	int counter; /*! Count number of files have been read */

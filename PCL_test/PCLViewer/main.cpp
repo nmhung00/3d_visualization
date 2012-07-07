@@ -3,6 +3,9 @@
 #include <iostream>
 
 int main(int argv, char **argc) {
+	cout << "Usage: ./viewer [positionsDirectory] [pointsDirectory]\n";
+	cout << "Default positionsDirectory is \"positions\" and Default pointsDirectory is \"points\"";
+	
 	string positionsDirectory;
 	string pointsDirectory;
 	if(argv != 1) {

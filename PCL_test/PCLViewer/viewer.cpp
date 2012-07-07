@@ -6,14 +6,12 @@ using namespace std;
 Viewer::Viewer() {
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> temp_viewer (new pcl::visualization::PCLVisualizer ("3D Viewer"));
 	viewer = temp_viewer;
-	//~ viewer = visualization::CloudViewer("Viewer");
 	init();
 };
 
 Viewer::Viewer(string windowName) {
 	boost::shared_ptr<pcl::visualization::PCLVisualizer> temp_viewer (new pcl::visualization::PCLVisualizer (windowName));
 	viewer = temp_viewer;
-	//~ viewer = visualization::CloudViewer(windowName);
 	init();
 };
 
@@ -34,16 +32,14 @@ void Viewer::init() {
 }
 
 Viewer::~Viewer() {
-	//~ delete viewer;
+
 };
 
 void Viewer::setPointsDirectory(string pointsDirectory) {
-	//~ this->pointsDirectory = pointsDirectory;
 	this->pointsFiles = read_directory(pointsDirectory);
 }
 
 void Viewer::setPositionsDirectory(string positionsDirectory) {
-	//~ this->positionsDirectory = positionsDirectory;
 	this->positionsFiles = read_directory(positionsDirectory);
 }	
 
