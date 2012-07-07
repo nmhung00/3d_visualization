@@ -60,7 +60,7 @@ void Viewer::setCameraPosition(double pos_x, double pos_y, double pos_z, double 
 }
 
 void Viewer::updatePoints(boost::shared_ptr<visualization::PCLVisualizer> PCLViewer) {	
-	cout << "Counter: " << counter << endl;
+	//~ cout << "Counter: " << counter << endl;
 	
 	ifstream tempFile;
 	string tempLine;
