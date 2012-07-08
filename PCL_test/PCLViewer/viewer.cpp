@@ -76,7 +76,8 @@ void Viewer::updatePoints(boost::shared_ptr<visualization::PCLVisualizer> PCLVie
     double v[3];
     double cameraDirection[3];
 	
-	PointCloud<PointXYZRGB>::Ptr pc_ptr (new PointCloud<PointXYZRGB>);
+	PointCloud<PointXYZRGB>::Ptr pc_ptr_position (new PointCloud<PointXYZRGB>);
+	PointCloud<PointXYZRGB>::Ptr pc_ptr_points (new PointCloud<PointXYZRGB>);
     
     // Setting points color
 	uint8_t point_r = pointsColor[0], point_g = pointsColor[1], point_b = pointsColor[2];
@@ -99,7 +100,7 @@ void Viewer::updatePoints(boost::shared_ptr<visualization::PCLVisualizer> PCLVie
 		p.x = v[0];
 		p.y = v[1];
 		p.z = v[2];
-		pc_ptr->points.push_back(p);
+		pc_ptr_position->points.push_back(p);
 		
 		// Setting camera's info
 		if(autoTracking == true) {
@@ -126,7 +127,7 @@ void Viewer::updatePoints(boost::shared_ptr<visualization::PCLVisualizer> PCLVie
 		p.x = v[0];
 		p.y = v[1];
 		p.z = v[2];
-		pc_ptr->points.push_back(p);
+		pc_ptr_points->points.push_back(p);
 		free(temp);
 	}
 	tempFile.close();
@@ -134,14 +135,23 @@ void Viewer::updatePoints(boost::shared_ptr<visualization::PCLVisualizer> PCLVie
 	stringstream ss;
 	ss << counter;
 	
-    visualization::PointCloudColorHandlerRGBField<PointXYZRGB> colorHandler(pc_ptr);
+    visualization::PointCloudColorHandlerRGBField<PointXYZRGB> colorHandlerPosition(pc_ptr_position);
+    visualization::PointCloudColorHandlerRGBField<PointXYZRGB> colorHandlerPoints(pc_ptr_points);
     
-    PCLViewer->addPointCloud<pcl::PointXYZRGB>(pc_ptr, colorHandler, ss.str());
+    PCLViewer->addPointCloud<PointXYZRGB>(pc_ptr_position, colorHandlerPosition, "position" + ss.str());
+    PCLViewer->addPointCloud<PointXYZRGB>(pc_ptr_points, colorHandlerPoints, "points" + ss.str());
 	
 	counter++;
 	// Stop when all the files have been drawn
 	//~ if(counter >= pointsFiles.size())
 		//~ PCLViewer->spin();
+}
+
+bool Viewer::removePosition(int index) {
+	stringstream ss;
+	ss << index;
+	string id = "position" + ss.str();
+	return viewer->removePointCloud(id);
 }
 
 void Viewer::addLine(Eigen::Vector3d &_p1, Eigen::Vector3d &_p2, int r, int g, int b) {
@@ -160,12 +170,14 @@ void Viewer::run() {
 	viewer->setBackgroundColor(backgroundColor[0], backgroundColor[1], backgroundColor[2]);
 	
 	Eigen::Vector3d v1(0, 0, 0);
-	Eigen::Vector3d v2(0, 10, 10);
+	Eigen::Vector3d v2(0, 2, 2);
 	addLine(v1, v2, 0, 0, 255);
 	
 	while (!viewer->wasStopped ()) {
-		if(counter < pointsFiles.size())
+		if(counter < pointsFiles.size()) {
 			updatePoints(viewer);
-		viewer->spinOnce(10);
+			removePosition(counter - 100);
+		}
+		viewer->spinOnce(50);
 	}
 }

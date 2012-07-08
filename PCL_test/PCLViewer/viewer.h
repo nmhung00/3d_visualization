@@ -107,7 +107,13 @@ public:
 	void run();
 	
 	//! Remove the position of the robot by index
-	void removePosition(int index);
+	/**
+	 * @param index
+	 * 	index of the position that is going to be removed
+	 * @return
+	 * 	Return true if the position is successfully removed and false if it fails to remove the position
+	 */
+	bool removePosition(int index);
 	
 	//! Add a line into the viewer
 	/**
