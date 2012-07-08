@@ -6,6 +6,8 @@
 #include <pcl/io/io.h>
 #include <pcl/io/pcd_io.h>
 #include <vector>
+#include <list>
+#include <Eigen/Dense>
 
 #include "read_directory.h"
 
@@ -48,11 +50,8 @@ public:
 	 */
 	void setPositionsDirectory(string positionsDirectory);
 	
-	//! Updating points which are going to be drawn
+	//! Updating points from files which are going to be drawn
 	void updatePoints(boost::shared_ptr<visualization::PCLVisualizer> PCLViewer);
-
-	//! Displaying points on the screen
-	void run();
 	
 	//! Setting camera position
 	/**
@@ -80,7 +79,7 @@ public:
 	 * @param b
 	 * 	blue component
 	 */
-	void setBackGroundColor(int r, int g, int b);
+	void setBackgroundColor(int r, int g, int b);
 
 	//! Setting color for points
 	/**
@@ -103,6 +102,45 @@ public:
 	 * 	blue component
 	 */
 	void setPositionsColor(int r, int g, int b);
+	
+	//! Displaying points on the screen
+	void run();
+	
+	//! Remove the position of the robot by index
+	void removePosition(int index);
+	
+	//! Add a line into the viewer
+	/**
+	 * @param p1
+	 * 	One end of the line
+	 * @param p2
+	 * 	The other end of the line
+	 * @param r
+	 * 	red component of the line's color
+	 * @param g
+	 * 	green component of the line's color
+	 * @param b
+	 * 	blue component of the line's color
+	 */
+	void addLine(Eigen::Vector3d p1, Eigen::Vector3d p2, int r, int g, int b);
+	
+	//! Add points into the viewer
+	/**
+	 * @param points
+	 * 	List of points
+	 * @param id
+	 * 	Id of the adding points
+	 */
+	void addPoints(list<Eigen::Vector3d> points, int id);
+	
+	//! Add a position into the viewer
+	/**
+	 * @param position
+	 * 	The coordinate of the position
+	 * @param id
+	 * 	Id of the position
+	 */
+	void addPosition(Eigen::Vector3d position, int id);
 
 	bool autoTracking; /*! Let the program change camera's positions and directions automatically */
 private:
@@ -112,6 +150,7 @@ private:
 	int counter; /*! Count number of files have been read */
 	int pointsColor[3]; /*! Color of points, stored in format [red, green, blue] */
 	int positionsColor[3]; /*! Color of positions, stored in format [red, green, blue] */
+	int backgroundColor[3]; /*! Color of background, stored in format [red, green, blue] */
 	double lastPosition[3]; /*! Last position which has been drawn. It is used for camera to track automatically */
 };
 #endif

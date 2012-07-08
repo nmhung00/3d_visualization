@@ -23,6 +23,10 @@ int main(int argv, char **argc) {
 	
 	testViewer.setPositionsDirectory(positionsDirectory);
 	testViewer.setPointsDirectory(pointsDirectory);
+
+	testViewer.setBackgroundColor(0, 0, 255);
+	
+	testViewer.autoTracking = true;
 	
 	testViewer.run();
 	return 0;

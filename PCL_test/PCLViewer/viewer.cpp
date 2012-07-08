@@ -23,7 +23,9 @@ void Viewer::init() {
 	positionsColor[0] = 0;
 	positionsColor[1] = 255;
 	positionsColor[2] = 0;
-	viewer->setBackgroundColor(0, 0, 0);
+	backgroundColor[0] = 0;
+	backgroundColor[1] = 0;
+	backgroundColor[2] = 0;
 	viewer->addCoordinateSystem (1.0);
 	autoTracking = false;
 	lastPosition[0] = 0;
@@ -42,6 +44,12 @@ void Viewer::setPointsDirectory(string pointsDirectory) {
 void Viewer::setPositionsDirectory(string positionsDirectory) {
 	this->positionsFiles = read_directory(positionsDirectory);
 }	
+
+void Viewer::setBackgroundColor(int r, int g, int b) {
+	backgroundColor[0] = r;
+	backgroundColor[1] = g;
+	backgroundColor[2] = b;
+}
 
 void Viewer::setPointsColor(int r, int g, int b) {
 	pointsColor[0] = r;
@@ -95,10 +103,10 @@ void Viewer::updatePoints(boost::shared_ptr<visualization::PCLVisualizer> PCLVie
 		
 		// Setting camera's info
 		if(autoTracking == true) {
-			cameraDirection[0] = lastPosition[0] - v[0];
-			cameraDirection[1] = lastPosition[1] - v[1];
-			cameraDirection[2] = lastPosition[2] - v[2];
-			setCameraPosition(v[0] + 10, v[1] + 10, v[2] + 10, cameraDirection[0], cameraDirection[1], cameraDirection[2]);
+			cameraDirection[0] = (-1) * (lastPosition[0] - v[0]);
+			cameraDirection[1] = (-1) * (lastPosition[1] - v[1]);
+			cameraDirection[2] = (-1) * (lastPosition[2] - v[2]);
+			setCameraPosition(v[0] - 2, v[1] -2, v[2] -2, cameraDirection[0], cameraDirection[1], cameraDirection[2]);
 		}
 		
 		free(temp);
@@ -132,14 +140,20 @@ void Viewer::updatePoints(boost::shared_ptr<visualization::PCLVisualizer> PCLVie
 	
 	counter++;
 	// Stop when all the files have been drawn
-	if(counter >= pointsFiles.size())
-		PCLViewer->spin();
+	//~ if(counter >= pointsFiles.size())
+		//~ PCLViewer->spin();
+}
+
+void Viewer::addLine(Eigen::Vector3d _p1, Eigen::Vector3d _p2, int r, int g, int b) {
+	PointXYZ p1;
+	PointXYZ p2;
 }
 
 void Viewer::run() {
-	//~ viewer->runOnVisualizationThread (Viewer::updatePoints);
+	viewer->setBackgroundColor(backgroundColor[0], backgroundColor[1], backgroundColor[2]);
 	while (!viewer->wasStopped ()) {
-		updatePoints(viewer);
-		viewer->spinOnce();
+		if(counter < pointsFiles.size())
+			updatePoints(viewer);
+		viewer->spinOnce(10);
 	}
 }
