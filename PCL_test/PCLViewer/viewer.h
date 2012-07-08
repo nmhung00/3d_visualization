@@ -122,7 +122,7 @@ public:
 	 * @param b
 	 * 	blue component of the line's color
 	 */
-	void addLine(Eigen::Vector3d p1, Eigen::Vector3d p2, int r, int g, int b);
+	void addLine(Eigen::Vector3d &p1, Eigen::Vector3d &p2, int r, int g, int b);
 	
 	//! Add points into the viewer
 	/**

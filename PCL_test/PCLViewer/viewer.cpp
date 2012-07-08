@@ -144,13 +144,25 @@ void Viewer::updatePoints(boost::shared_ptr<visualization::PCLVisualizer> PCLVie
 		//~ PCLViewer->spin();
 }
 
-void Viewer::addLine(Eigen::Vector3d _p1, Eigen::Vector3d _p2, int r, int g, int b) {
+void Viewer::addLine(Eigen::Vector3d &_p1, Eigen::Vector3d &_p2, int r, int g, int b) {
 	PointXYZ p1;
 	PointXYZ p2;
+	p1.x = _p1(0);
+	p1.y = _p1(1);
+	p1.z = _p1(2);
+	p2.x = _p2(0);
+	p2.y = _p2(1);
+	p2.z = _p2(2);
+	viewer->addLine<PointXYZ> (p1, p2, r, g, b, "line");
 }
 
 void Viewer::run() {
 	viewer->setBackgroundColor(backgroundColor[0], backgroundColor[1], backgroundColor[2]);
+	
+	Eigen::Vector3d v1(0, 0, 0);
+	Eigen::Vector3d v2(0, 10, 10);
+	addLine(v1, v2, 0, 0, 255);
+	
 	while (!viewer->wasStopped ()) {
 		if(counter < pointsFiles.size())
 			updatePoints(viewer);
