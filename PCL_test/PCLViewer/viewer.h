@@ -11,6 +11,8 @@
 
 #include "read_directory.h"
 
+
+
 using namespace pcl;
 using namespace std;
 
@@ -35,6 +37,24 @@ public:
 
 	//! Initialize counter = 0, pointsColor = (255, 0, 0), positionsColor (0, 255, 0), background color = (0, 0, 0)
 	void init();
+
+	//! Adding left mouse clicking event handler
+	/**
+	 * @param event
+	 * 	The event of mouse clicking
+	 * @param viewer_void
+	 * 	The viewer
+	 */
+	void static mouseEventOccurred (const visualization::MouseEvent &event, void* viewer_void);
+	
+	//! Adding space pressing event handler
+	/**
+	 * @param event
+	 * 	The event of pressing space key
+	 * @param viewer_void
+	 * 	The viewer
+	 */
+	void static keyboardEventOccurred (const pcl::visualization::KeyboardEvent &event, void* viewer_void);
 
 	//! Set the path to points directory
 	/**
@@ -137,7 +157,7 @@ public:
 	 * @param id
 	 * 	Id of the adding points
 	 */
-	void addPoints(list<Eigen::Vector3d> points, int id);
+	void addPoints(list<Eigen::Vector3d, Eigen::aligned_allocator<Eigen::Vector3d> > points, int id);
 	
 	//! Add a position into the viewer
 	/**
@@ -147,8 +167,28 @@ public:
 	 * 	Id of the position
 	 */
 	void addPosition(Eigen::Vector3d position, int id);
+		
+	//! Check if the viewer was stopped by user (closing the display window)
+	bool wasStopped();
+	
+	//! Stop updating display window
+	void finish();
+	
+	//! Get number of files which the viewer is going to display
+	int getNumberOfFiles();
+	
+	boost::shared_ptr<visualization::PCLVisualizer> getViewer() { return viewer; };
+	
+	//! Refresh the display window
+	/**
+	 * @param time
+	 * 	Time (in ms) for processing data
+	 */
+	void refresh(int time);
 
 	bool autoTracking; /*! Let the program change camera's positions and directions automatically */
+	
+	//~ static bool stop;
 private:
 	boost::shared_ptr<visualization::PCLVisualizer> viewer; /*! The viewer which displays point clouds*/
 	vector<string> pointsFiles; /*! List of names of files of points */
@@ -159,4 +199,8 @@ private:
 	int backgroundColor[3]; /*! Color of background, stored in format [red, green, blue] */
 	double lastPosition[3]; /*! Last position which has been drawn. It is used for camera to track automatically */
 };
+
+//~ void keyboardEventOccurred (const visualization::KeyboardEvent &event, void* viewer_void);
+//~ 
+//~ void mouseEventOccurred (const visualization::MouseEvent &event, void* viewer_void);
 #endif
